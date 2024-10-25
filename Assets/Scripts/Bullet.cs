@@ -8,11 +8,9 @@ public class Bullet : MonoBehaviour
     [SerializeField] float speedBullet;
     [SerializeField] Rigidbody _rb;
     float lifeBullet;
-    
 
-    void Start()
+    private void Awake()
     {
-       
         _rb = GetComponent<Rigidbody>();
         _rb.velocity = Vector3.left * speedBullet;
     }
@@ -25,25 +23,22 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            lifeBullet = 0;
             DestroyBullet();
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("enemy"))
-        {
-            Debug.Log("shoot");
-            Enemy.health -= 35;
-            if(Enemy.health <= 0)
-            {
-                Destroy(Enemy.enemy);
-            }
+            if(collision.gameObject.CompareTag("enemy") || collision.gameObject.CompareTag("prop"))
             DestroyBullet();
+
+            Damage damage = collision.gameObject.GetComponent<Damage>();
+            if (collision.gameObject.CompareTag("enemy"))
+            {
+                damage.TakeDamage(1);
+            }
+
         }
-    }
     void DestroyBullet()
     {
         Destroy(this.gameObject);

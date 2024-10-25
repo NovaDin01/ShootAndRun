@@ -5,15 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - enemy
+  - prop
+  - money
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bullet
   - Water
   - UI
-  - 
-  - 
+  - NoBullet
+  - enemyMask
   - 
   - 
   - 
